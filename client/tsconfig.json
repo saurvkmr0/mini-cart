@@ -6,6 +6,12 @@
       "dom.iterable",
       "esnext"
     ],
+    "strictFunctionTypes": true, // Ensures all function types are compatible
+    "strictNullChecks": true,   // Ensures null and undefined are handled explicitly
+    "noImplicitReturns": true,  // Ensures functions explicitly return a value
+    "noImplicitThis": true,
+    "noImplicitAny": true, 
+    //added from here
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
