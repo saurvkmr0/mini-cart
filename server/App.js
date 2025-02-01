@@ -1,30 +1,28 @@
 import express from "express"
 import dotenv from "dotenv"
-import connectToDatabase from "./db.js"
-
 dotenv.config()
+import cors from 'cors';
+import connectToDatabase from "./config/db.js"
+import usersRoute from "./src/routes/usersRoute.js"
+
 
 const app = express()
 const PORT = process.env.PORT || 4000
 
-// Middleware
-app.use(express.json())
-
-// Connect to MongoDB before starting the server
-connectToDatabase()
-  .then((database) => {
-    // You can use the database connection in your routes
-    app.get("/", (req, res) => {
-      res.send("Hello, MongoDB!")
-    })
-
-    // Start the server
-    app.listen(PORT, () => {
-      console.log(`Server is running on port ${PORT}`)
-    })
+connectToDatabase().then(()=>{
+  app.listen(PORT,()=>{
+    console.log(`server is listening on PORT ${PORT}`);
   })
-  .catch((error) => {
-    console.error("Failed to connect to the database:", error)
-    process.exit(1)
-  })
+  app.use(cors());
+  app.use(express.json());
+  app.use('/api',usersRoute)
+})
+.catch((error)=>{
+  console.log(`failed to connect to db ${error}`);
+})
+
+// // Middleware
+// app.use(express.json())
+
+
 
