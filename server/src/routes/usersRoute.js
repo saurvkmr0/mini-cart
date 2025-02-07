@@ -25,7 +25,8 @@ usersRoute.post('/users',async(req,res)=>{
 
 usersRoute.get('/users',async(req,res)=>{
     try{
-        const user = await users.find();
+        const user = await users.findOne({email:req.query.email},{password:1, _id:1});
+        console.log(user);
         res.status(200).json(user);
     }catch(error){
         res.status(404).json(user);

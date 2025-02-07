@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import bcrypt from 'bcryptjs';
+import axios from "axios";
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -16,8 +18,25 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Login data:", formData);
-    // Handle login logic
+    axios
+    .get('http://localhost:5500/api/users',{params:{email:formData.email}})
+    .then((response)=>{
+      bcrypt.compare(formData.password,response.data.password)
+      .then((match) => {
+        if (match) {
+          console.log("Success: Passwords match");
+        } else {
+          console.log("Failed: Passwords do not match");
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      }); 
+    })
+    .catch(()=>{
+      console.log("error")
+    })
+    
   };
 
   return (

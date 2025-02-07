@@ -29,8 +29,8 @@ const Signup = () => {
     axios
         .post("http://localhost:5500/api/users", updatedFormData)
         .then((response) => {
-            console.log("Success:", response.data);
-            navigate("/login"); // Redirect to login after signup
+            // console.log("Success:", response.data);
+            navigate("/login"); 
         })
         .catch((error) => {
             alert(JSON.stringify(error.response.data));
