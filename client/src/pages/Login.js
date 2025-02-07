@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from 'axios';
 
 const LoginSignup = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -22,7 +23,15 @@ const LoginSignup = () => {
         password: formData.password,
       });
     } else {
-      console.log("Signup data:", formData);
+      // console.log("Signup data:", formData);
+      axios.post('http://localhost:5500/api/users',formData)
+      .then(response => {
+        console.log('Success:', response.data);
+      })
+      .catch(error => {
+        alert(JSON.stringify(error.response.data));
+        console.error('Error:', error);
+      });
     }
   };
 
