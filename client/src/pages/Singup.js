@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import bcrypt, { hash } from 'bcryptjs';
 
 const Signup = () => {
   const [formData, setFormData] = useState({
@@ -20,16 +19,11 @@ const Signup = () => {
 
   const handleSubmit = async(e) => {
     e.preventDefault();
-    var salt = await bcrypt.genSalt(10);
-    var password = await bcrypt.hash(formData.password, salt);
-    const updatedFormData = {
-        ...formData,
-        password: password
-    }
+    console.log(formData);
     axios
-        .post("http://localhost:5500/api/users", updatedFormData)
+        .post("http://localhost:5500/api/users", formData)
         .then((response) => {
-            // console.log("Success:", response.data);
+            console.log("Success:", response.data);
             navigate("/login"); 
         })
         .catch((error) => {
