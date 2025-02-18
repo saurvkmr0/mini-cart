@@ -45,7 +45,7 @@ usersRoute.get('/users',async(req,res)=>{
                     res.status(200).json(user.email);
                 }else{
                     console.log("incorrect password");
-                    res.status(400);
+                    res.status(400).json({ error: "Incorrect password" });
                 }
             })
         }

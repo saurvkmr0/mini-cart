@@ -21,11 +21,12 @@ const Login = () => {
     .get('http://localhost:5500/api/users',{params:{email:formData.email,password:formData.password}})
     .then((response)=>{
       console.log(response);
+      alert("Log-in success");
     })
     .catch((error)=>{
-      console.log({error:error})
+      console.log({error});
+      alert("Log-in failed");
     })
-    
   };
 
   return (
