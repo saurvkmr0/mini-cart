@@ -45,7 +45,7 @@ usersRoute.get('/users',async(req,res)=>{
                     res.status(200).json(user.email);
                 }else{
                     console.log("incorrect password");
-                    res.status(400);
+                    res.status(400).json({ error: "Incorrect password" });
                 }
             })
         }
@@ -53,5 +53,17 @@ usersRoute.get('/users',async(req,res)=>{
         res.status(404).json(user);
     }
 })
+
+usersRoute.get('/allusers', async (req, res) => {
+    try {
+        const allUsers = await users.find();
+        console.log(allUsers);
+        res.status(200).json(allUsers);
+    } catch (error) {
+        console.error("Error fetching users:", error);
+        res.status(500).json({ error: "Failed to fetch users" });
+    }
+});
+
 
 export default usersRoute;
