@@ -9,7 +9,7 @@ function RegisteredUsers() {
 
   useEffect(()=>{
     const fetchUser = ()=>{
-        axios.get('http://localhost:5500/api/users')
+        axios.get('http://localhost:5500/api/allusers')
       .then((response) => {
         setUsers(response.data);
       }).catch((error) => {

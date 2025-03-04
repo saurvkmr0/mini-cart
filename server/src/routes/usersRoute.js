@@ -57,7 +57,6 @@ usersRoute.get('/users',async(req,res)=>{
 usersRoute.get('/allusers', async (req, res) => {
     try {
         const allUsers = await users.find();
-        console.log(allUsers);
         res.status(200).json(allUsers);
     } catch (error) {
         console.error("Error fetching users:", error);
